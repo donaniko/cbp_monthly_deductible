@@ -1,0 +1,648 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CBPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errori trovati durante la generazione:
+avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'E:\PROGETTI\CBP_MONTHLY_DEDUCTIBLE\CBP.DATALAYER\CBP.MDF.dbo.BankTransferPolicies'. La chiave è stata dedotta e la definizione è stata creata come tabella/visualizzazione di sola lettura.-->
+        <EntityType Name="BankTransferPolicies">
+          <Key>
+            <PropertyRef Name="Id" />
+            
+            
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BankTransferId" Type="int" Nullable="false" />
+          <Property Name="TacticalRowId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BankTransfers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="DataDistinta" Type="datetime" Nullable="false" />
+          <Property Name="DataValuta" Type="datetime" />
+          <Property Name="RimborsoDanni" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Beneficiaries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Iban" Type="nvarchar" MaxLength="50" />
+          <Property Name="BirthDate" Type="datetime" />
+          <Property Name="Share" Type="float" Nullable="false" />
+          <Property Name="TacticalRowId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cancellations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TacticalRowId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="PremioAccantonatoVita" Type="bit" />
+          <Property Name="PremioRimborsatoVita" Type="bit" />
+          <Property Name="DataAccantonatoVita" Type="datetime" />
+          <Property Name="PremioAccantonatoDanni" Type="bit" />
+          <Property Name="PremioRimborsatoDanni" Type="bit" />
+          <Property Name="DataAccontonatoDanni" Type="datetime" />
+          <Property Name="BankTransferId" Type="int" />
+          <Property Name="DataDistintaVita" Type="datetime" />
+          <Property Name="DataDistintaDanni" Type="datetime" />
+          <Property Name="DataValutaVita" Type="datetime" />
+          <Property Name="DataValutaDanni" Type="datetime" />
+        </EntityType>
+        <EntityType Name="GeneralInfos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastImportedFileName" Type="nvarchar" MaxLength="250" />
+          <Property Name="LastImportedDate" Type="datetime" />
+          <Property Name="LastEAPImportedFileName" Type="nvarchar" MaxLength="250" />
+          <Property Name="LastEAPImportedDate" Type="datetime" />
+          <Property Name="LastRecessiImportedFileName" Type="nvarchar" MaxLength="250" />
+          <Property Name="LastRecessiImportedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Prodotto" Type="nvarchar" MaxLength="250" />
+          <Property Name="Convenzione" Type="nvarchar" MaxLength="250" />
+          <Property Name="FeesA" Type="float" />
+          <Property Name="FeesB" Type="float" />
+          <Property Name="Tipologia" Type="nvarchar" MaxLength="50" />
+          <Property Name="CodeCNPSI" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TacticalRows">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PolicyNumber" Type="int" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="250" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="250" />
+          <Property Name="Birth" Type="date" Nullable="false" />
+          <Property Name="CalculatedAge" Type="int" Nullable="false" />
+          <Property Name="Sex" Type="int" Nullable="false" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Location" Type="nvarchar" MaxLength="250" />
+          <Property Name="Street" Type="nvarchar" MaxLength="250" />
+          <Property Name="TransactionType" Type="nvarchar" MaxLength="10" />
+          <Property Name="Tariff" Type="nvarchar" MaxLength="10" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="DateOfCancellation" Type="datetime" />
+          <Property Name="DateOfSignature" Type="datetime" />
+          <Property Name="ExpirationDate" Type="datetime" />
+          <Property Name="InsuredSum" Type="float" />
+          <Property Name="PremioLordo" Type="float" Nullable="false" />
+          <Property Name="Tassi" Type="float" />
+          <Property Name="PremioNetto" Type="float" />
+          <Property Name="Commissioni" Type="float" />
+          <Property Name="PremioVita" Type="float" />
+          <Property Name="CommissioniVita" Type="float" />
+          <Property Name="PremioLordoDanni" Type="float" />
+          <Property Name="TassiDanni" Type="float" />
+          <Property Name="PremioNettoDanni" Type="float" />
+          <Property Name="CommissioniDanni" Type="float" />
+          <Property Name="InsuredRate" Type="float" />
+          <Property Name="ImportoEstinzione" Type="float" />
+          <Property Name="CapitaleResiduo" Type="float" />
+          <Property Name="DataRimborso" Type="datetime" />
+          <Property Name="Provincia" Type="nvarchar" MaxLength="50" />
+          <Property Name="Iban" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateOfCancellation2" Type="datetime" />
+          <Property Name="DateOfCancellation3" Type="datetime" />
+          <Property Name="ImportoEstinzione2" Type="float" />
+          <Property Name="ExpirationDate2" Type="datetime" />
+          <Property Name="DebitoResiduo" Type="float" />
+          <Property Name="HE" Type="nvarchar" MaxLength="50" />
+          <Property Name="CognomeCoIntestario" Type="nvarchar" MaxLength="50" />
+          <Property Name="NomeCoIntestatario" Type="nvarchar" MaxLength="50" />
+          <Property Name="DataLavorazione" Type="date" />
+          <Property Name="RichiestaSottoscrittore" Type="bit" />
+          <Property Name="CartaIdentita" Type="bit" />
+          <Property Name="CodiceFiscale" Type="bit" />
+          <Property Name="Cointestatario" Type="bit" />
+          <Property Name="CointestatarioCartaIdentita" Type="bit" />
+          <Property Name="NominativoAderente" Type="nvarchar" MaxLength="150" />
+          <Property Name="CodiceFiscaleAderente" Type="nvarchar" MaxLength="50" />
+          <Property Name="DebitoResiduoIniziale" Type="float" />
+          <Property Name="CointestatarioDataNascita" Type="datetime" />
+          <Property Name="RecessoDisdettaCompleto" Type="bit" Nullable="false" />
+          <Property Name="Santander" Type="bit" Nullable="false" />
+          <Property Name="Targa" Type="nvarchar" MaxLength="100" />
+          <Property Name="Telaio" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_BankTransferPolicies_BankTransfers">
+          <End Role="BankTransfers" Type="Self.BankTransfers" Multiplicity="1" />
+          <End Role="BankTransferPolicies" Type="Self.BankTransferPolicies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankTransfers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankTransferPolicies">
+              <PropertyRef Name="BankTransferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BankTransferPolicies_TacticalRows">
+          <End Role="TacticalRows" Type="Self.TacticalRows" Multiplicity="1" />
+          <End Role="BankTransferPolicies" Type="Self.BankTransferPolicies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacticalRows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankTransferPolicies">
+              <PropertyRef Name="TacticalRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beneficiaries_TacticalRows">
+          <End Role="TacticalRows" Type="Self.TacticalRows" Multiplicity="1" />
+          <End Role="Beneficiaries" Type="Self.Beneficiaries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacticalRows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Beneficiaries">
+              <PropertyRef Name="TacticalRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cancellations_BankTransfers">
+          <End Role="BankTransfers" Type="Self.BankTransfers" Multiplicity="0..1" />
+          <End Role="Cancellations" Type="Self.Cancellations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankTransfers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cancellations">
+              <PropertyRef Name="BankTransferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cancellations_TacticalRows">
+          <End Role="TacticalRows" Type="Self.TacticalRows" Multiplicity="1" />
+          <End Role="Cancellations" Type="Self.Cancellations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacticalRows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cancellations">
+              <PropertyRef Name="TacticalRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CBPModelStoreContainer">
+          <EntitySet Name="BankTransfers" EntityType="Self.BankTransfers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Beneficiaries" EntityType="Self.Beneficiaries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cancellations" EntityType="Self.Cancellations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GeneralInfos" EntityType="Self.GeneralInfos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TacticalRows" EntityType="Self.TacticalRows" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BankTransferPolicies" EntityType="Self.BankTransferPolicies" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [BankTransferPolicies].[Id] AS [Id], 
+    [BankTransferPolicies].[BankTransferId] AS [BankTransferId], 
+    [BankTransferPolicies].[TacticalRowId] AS [TacticalRowId]
+    FROM [dbo].[BankTransferPolicies] AS [BankTransferPolicies]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_BankTransferPolicies_BankTransfers" Association="Self.FK_BankTransferPolicies_BankTransfers">
+            <End Role="BankTransfers" EntitySet="BankTransfers" />
+            <End Role="BankTransferPolicies" EntitySet="BankTransferPolicies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BankTransferPolicies_TacticalRows" Association="Self.FK_BankTransferPolicies_TacticalRows">
+            <End Role="TacticalRows" EntitySet="TacticalRows" />
+            <End Role="BankTransferPolicies" EntitySet="BankTransferPolicies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beneficiaries_TacticalRows" Association="Self.FK_Beneficiaries_TacticalRows">
+            <End Role="TacticalRows" EntitySet="TacticalRows" />
+            <End Role="Beneficiaries" EntitySet="Beneficiaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cancellations_BankTransfers" Association="Self.FK_Cancellations_BankTransfers">
+            <End Role="BankTransfers" EntitySet="BankTransfers" />
+            <End Role="Cancellations" EntitySet="Cancellations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cancellations_TacticalRows" Association="Self.FK_Cancellations_TacticalRows">
+            <End Role="TacticalRows" EntitySet="TacticalRows" />
+            <End Role="Cancellations" EntitySet="Cancellations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CBPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CBPEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Products" EntityType="CBPModel.Product" />
+          <EntitySet Name="GeneralInfos" EntityType="CBPModel.GeneralInfo" />
+          <EntitySet Name="BankTransferPolicies" EntityType="CBPModel.BankTransferPolicy" />
+          <EntitySet Name="BankTransfers" EntityType="CBPModel.BankTransfer" />
+          <AssociationSet Name="FK_BankTransferPolicies_BankTransfers" Association="CBPModel.FK_BankTransferPolicies_BankTransfers">
+            <End Role="BankTransfer" EntitySet="BankTransfers" />
+            <End Role="BankTransferPolicy" EntitySet="BankTransferPolicies" />
+          </AssociationSet>
+          <EntitySet Name="Beneficiaries" EntityType="CBPModel.Beneficiary" />
+          <EntitySet Name="Cancellations" EntityType="CBPModel.Cancellation" />
+          <AssociationSet Name="FK_Cancellations_BankTransfers" Association="CBPModel.FK_Cancellations_BankTransfers">
+            <End Role="BankTransfer" EntitySet="BankTransfers" />
+            <End Role="Cancellation" EntitySet="Cancellations" />
+          </AssociationSet>
+          <EntitySet Name="TacticalRows" EntityType="CBPModel.TacticalRow" />
+          <AssociationSet Name="FK_BankTransferPolicies_TacticalRows" Association="CBPModel.FK_BankTransferPolicies_TacticalRows">
+            <End Role="TacticalRow" EntitySet="TacticalRows" />
+            <End Role="BankTransferPolicy" EntitySet="BankTransferPolicies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Beneficiaries_TacticalRows" Association="CBPModel.FK_Beneficiaries_TacticalRows">
+            <End Role="TacticalRow" EntitySet="TacticalRows" />
+            <End Role="Beneficiary" EntitySet="Beneficiaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cancellations_TacticalRows" Association="CBPModel.FK_Cancellations_TacticalRows">
+            <End Role="TacticalRow" EntitySet="TacticalRows" />
+            <End Role="Cancellation" EntitySet="Cancellations" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Prodotto" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Convenzione" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FeesA" Type="Double" />
+          <Property Name="FeesB" Type="Double" />
+          <Property Name="Tipologia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CodeCNPSI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="GeneralInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastImportedFileName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LastImportedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastEAPImportedFileName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LastEAPImportedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastRecessiImportedFileName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="LastRecessiImportedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="BankTransferPolicy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BankTransferId" Type="Int32" Nullable="false" />
+          <Property Name="TacticalRowId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BankTransfer" Relationship="CBPModel.FK_BankTransferPolicies_BankTransfers" FromRole="BankTransferPolicy" ToRole="BankTransfer" />
+          <NavigationProperty Name="TacticalRow" Relationship="CBPModel.FK_BankTransferPolicies_TacticalRows" FromRole="BankTransferPolicy" ToRole="TacticalRow" />
+        </EntityType>
+        <EntityType Name="BankTransfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DataDistinta" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataValuta" Type="DateTime" Precision="3" />
+          <Property Name="RimborsoDanni" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BankTransferPolicies" Relationship="CBPModel.FK_BankTransferPolicies_BankTransfers" FromRole="BankTransfer" ToRole="BankTransferPolicy" />
+          <NavigationProperty Name="Cancellations" Relationship="CBPModel.FK_Cancellations_BankTransfers" FromRole="BankTransfer" ToRole="Cancellation" />
+        </EntityType>
+        <Association Name="FK_BankTransferPolicies_BankTransfers">
+          <End Type="CBPModel.BankTransfer" Role="BankTransfer" Multiplicity="1" />
+          <End Type="CBPModel.BankTransferPolicy" Role="BankTransferPolicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankTransfer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankTransferPolicy">
+              <PropertyRef Name="BankTransferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Beneficiary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Iban" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="3" />
+          <Property Name="Share" Type="Double" Nullable="false" />
+          <Property Name="TacticalRowId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TacticalRow" Relationship="CBPModel.FK_Beneficiaries_TacticalRows" FromRole="Beneficiary" ToRole="TacticalRow" />
+        </EntityType>
+        <EntityType Name="Cancellation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TacticalRowId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PremioAccantonatoVita" Type="Boolean" />
+          <Property Name="PremioRimborsatoVita" Type="Boolean" />
+          <Property Name="DataAccantonatoVita" Type="DateTime" Precision="3" />
+          <Property Name="PremioAccantonatoDanni" Type="Boolean" />
+          <Property Name="PremioRimborsatoDanni" Type="Boolean" />
+          <Property Name="DataAccontonatoDanni" Type="DateTime" Precision="3" />
+          <Property Name="BankTransferId" Type="Int32" />
+          <Property Name="DataDistintaVita" Type="DateTime" Precision="3" />
+          <Property Name="DataDistintaDanni" Type="DateTime" Precision="3" />
+          <Property Name="DataValutaVita" Type="DateTime" Precision="3" />
+          <Property Name="DataValutaDanni" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BankTransfer" Relationship="CBPModel.FK_Cancellations_BankTransfers" FromRole="Cancellation" ToRole="BankTransfer" />
+          <NavigationProperty Name="TacticalRow" Relationship="CBPModel.FK_Cancellations_TacticalRows" FromRole="Cancellation" ToRole="TacticalRow" />
+        </EntityType>
+        <Association Name="FK_Cancellations_BankTransfers">
+          <End Type="CBPModel.BankTransfer" Role="BankTransfer" Multiplicity="0..1" />
+          <End Type="CBPModel.Cancellation" Role="Cancellation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankTransfer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cancellation">
+              <PropertyRef Name="BankTransferId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TacticalRow">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PolicyNumber" Type="Int32" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CalculatedAge" Type="Int32" Nullable="false" />
+          <Property Name="Sex" Type="Int32" Nullable="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Street" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Tariff" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="DateOfCancellation" Type="DateTime" Precision="3" />
+          <Property Name="DateOfSignature" Type="DateTime" Precision="3" />
+          <Property Name="ExpirationDate" Type="DateTime" Precision="3" />
+          <Property Name="InsuredSum" Type="Double" />
+          <Property Name="PremioLordo" Type="Double" Nullable="false" />
+          <Property Name="Tassi" Type="Double" />
+          <Property Name="PremioNetto" Type="Double" />
+          <Property Name="Commissioni" Type="Double" />
+          <Property Name="PremioVita" Type="Double" />
+          <Property Name="CommissioniVita" Type="Double" />
+          <Property Name="PremioLordoDanni" Type="Double" />
+          <Property Name="TassiDanni" Type="Double" />
+          <Property Name="PremioNettoDanni" Type="Double" />
+          <Property Name="CommissioniDanni" Type="Double" />
+          <Property Name="InsuredRate" Type="Double" />
+          <Property Name="ImportoEstinzione" Type="Double" />
+          <Property Name="CapitaleResiduo" Type="Double" />
+          <Property Name="DataRimborso" Type="DateTime" Precision="3" />
+          <Property Name="Provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Iban" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfCancellation2" Type="DateTime" Precision="3" />
+          <Property Name="DateOfCancellation3" Type="DateTime" Precision="3" />
+          <Property Name="ImportoEstinzione2" Type="Double" />
+          <Property Name="ExpirationDate2" Type="DateTime" Precision="3" />
+          <Property Name="DebitoResiduo" Type="Double" />
+          <Property Name="HE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CognomeCoIntestario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NomeCoIntestatario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RichiestaSottoscrittore" Type="Boolean" />
+          <Property Name="CartaIdentita" Type="Boolean" />
+          <Property Name="CodiceFiscale" Type="Boolean" />
+          <Property Name="DataLavorazione" Type="DateTime" Precision="0" />
+          <Property Name="Cointestatario" Type="Boolean" />
+          <Property Name="CointestatarioCartaIdentita" Type="Boolean" />
+          <Property Name="NominativoAderente" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CodiceFiscaleAderente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DebitoResiduoIniziale" Type="Double" />
+          <Property Name="CointestatarioDataNascita" Type="DateTime" Precision="3" />
+          <Property Name="RecessoDisdettaCompleto" Type="Boolean" Nullable="false" />
+          <Property Name="Santander" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BankTransferPolicies" Relationship="CBPModel.FK_BankTransferPolicies_TacticalRows" FromRole="TacticalRow" ToRole="BankTransferPolicy" />
+          <NavigationProperty Name="Beneficiaries" Relationship="CBPModel.FK_Beneficiaries_TacticalRows" FromRole="TacticalRow" ToRole="Beneficiary" />
+          <NavigationProperty Name="Cancellations" Relationship="CBPModel.FK_Cancellations_TacticalRows" FromRole="TacticalRow" ToRole="Cancellation" />
+          <Property Name="Targa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Telaio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_BankTransferPolicies_TacticalRows">
+          <End Type="CBPModel.TacticalRow" Role="TacticalRow" Multiplicity="1" />
+          <End Type="CBPModel.BankTransferPolicy" Role="BankTransferPolicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacticalRow">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankTransferPolicy">
+              <PropertyRef Name="TacticalRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Beneficiaries_TacticalRows">
+          <End Type="CBPModel.TacticalRow" Role="TacticalRow" Multiplicity="1" />
+          <End Type="CBPModel.Beneficiary" Role="Beneficiary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacticalRow">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Beneficiary">
+              <PropertyRef Name="TacticalRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cancellations_TacticalRows">
+          <End Type="CBPModel.TacticalRow" Role="TacticalRow" Multiplicity="1" />
+          <End Type="CBPModel.Cancellation" Role="Cancellation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TacticalRow">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cancellation">
+              <PropertyRef Name="TacticalRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CBPModelStoreContainer" CdmEntityContainer="CBPEntities">
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="CBPModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="CodeCNPSI" ColumnName="CodeCNPSI" />
+                <ScalarProperty Name="Tipologia" ColumnName="Tipologia" />
+                <ScalarProperty Name="FeesB" ColumnName="FeesB" />
+                <ScalarProperty Name="FeesA" ColumnName="FeesA" />
+                <ScalarProperty Name="Convenzione" ColumnName="Convenzione" />
+                <ScalarProperty Name="Prodotto" ColumnName="Prodotto" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GeneralInfos">
+            <EntityTypeMapping TypeName="CBPModel.GeneralInfo">
+              <MappingFragment StoreEntitySet="GeneralInfos">
+                <ScalarProperty Name="LastRecessiImportedDate" ColumnName="LastRecessiImportedDate" />
+                <ScalarProperty Name="LastRecessiImportedFileName" ColumnName="LastRecessiImportedFileName" />
+                <ScalarProperty Name="LastEAPImportedDate" ColumnName="LastEAPImportedDate" />
+                <ScalarProperty Name="LastEAPImportedFileName" ColumnName="LastEAPImportedFileName" />
+                <ScalarProperty Name="LastImportedDate" ColumnName="LastImportedDate" />
+                <ScalarProperty Name="LastImportedFileName" ColumnName="LastImportedFileName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankTransferPolicies">
+            <EntityTypeMapping TypeName="CBPModel.BankTransferPolicy">
+              <MappingFragment StoreEntitySet="BankTransferPolicies">
+                <ScalarProperty Name="TacticalRowId" ColumnName="TacticalRowId" />
+                <ScalarProperty Name="BankTransferId" ColumnName="BankTransferId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankTransfers">
+            <EntityTypeMapping TypeName="CBPModel.BankTransfer">
+              <MappingFragment StoreEntitySet="BankTransfers">
+                <ScalarProperty Name="RimborsoDanni" ColumnName="RimborsoDanni" />
+                <ScalarProperty Name="DataValuta" ColumnName="DataValuta" />
+                <ScalarProperty Name="DataDistinta" ColumnName="DataDistinta" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Beneficiaries">
+            <EntityTypeMapping TypeName="CBPModel.Beneficiary">
+              <MappingFragment StoreEntitySet="Beneficiaries">
+                <ScalarProperty Name="TacticalRowId" ColumnName="TacticalRowId" />
+                <ScalarProperty Name="Share" ColumnName="Share" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Iban" ColumnName="Iban" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cancellations">
+            <EntityTypeMapping TypeName="CBPModel.Cancellation">
+              <MappingFragment StoreEntitySet="Cancellations">
+                <ScalarProperty Name="DataValutaDanni" ColumnName="DataValutaDanni" />
+                <ScalarProperty Name="DataValutaVita" ColumnName="DataValutaVita" />
+                <ScalarProperty Name="DataDistintaDanni" ColumnName="DataDistintaDanni" />
+                <ScalarProperty Name="DataDistintaVita" ColumnName="DataDistintaVita" />
+                <ScalarProperty Name="BankTransferId" ColumnName="BankTransferId" />
+                <ScalarProperty Name="DataAccontonatoDanni" ColumnName="DataAccontonatoDanni" />
+                <ScalarProperty Name="PremioRimborsatoDanni" ColumnName="PremioRimborsatoDanni" />
+                <ScalarProperty Name="PremioAccantonatoDanni" ColumnName="PremioAccantonatoDanni" />
+                <ScalarProperty Name="DataAccantonatoVita" ColumnName="DataAccantonatoVita" />
+                <ScalarProperty Name="PremioRimborsatoVita" ColumnName="PremioRimborsatoVita" />
+                <ScalarProperty Name="PremioAccantonatoVita" ColumnName="PremioAccantonatoVita" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="TacticalRowId" ColumnName="TacticalRowId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TacticalRows">
+            <EntityTypeMapping TypeName="CBPModel.TacticalRow">
+              <MappingFragment StoreEntitySet="TacticalRows">
+                <ScalarProperty Name="Telaio" ColumnName="Telaio" />
+                <ScalarProperty Name="Targa" ColumnName="Targa" />
+                <ScalarProperty Name="Santander" ColumnName="Santander" />
+                <ScalarProperty Name="RecessoDisdettaCompleto" ColumnName="RecessoDisdettaCompleto" />
+                <ScalarProperty Name="CointestatarioDataNascita" ColumnName="CointestatarioDataNascita" />
+                <ScalarProperty Name="DebitoResiduoIniziale" ColumnName="DebitoResiduoIniziale" />
+                <ScalarProperty Name="CodiceFiscaleAderente" ColumnName="CodiceFiscaleAderente" />
+                <ScalarProperty Name="NominativoAderente" ColumnName="NominativoAderente" />
+                <ScalarProperty Name="CointestatarioCartaIdentita" ColumnName="CointestatarioCartaIdentita" />
+                <ScalarProperty Name="Cointestatario" ColumnName="Cointestatario" />
+                <ScalarProperty Name="DataLavorazione" ColumnName="DataLavorazione" />
+                <ScalarProperty Name="CodiceFiscale" ColumnName="CodiceFiscale" />
+                <ScalarProperty Name="CartaIdentita" ColumnName="CartaIdentita" />
+                <ScalarProperty Name="RichiestaSottoscrittore" ColumnName="RichiestaSottoscrittore" />
+                <ScalarProperty Name="NomeCoIntestatario" ColumnName="NomeCoIntestatario" />
+                <ScalarProperty Name="CognomeCoIntestario" ColumnName="CognomeCoIntestario" />
+                <ScalarProperty Name="HE" ColumnName="HE" />
+                <ScalarProperty Name="DebitoResiduo" ColumnName="DebitoResiduo" />
+                <ScalarProperty Name="ExpirationDate2" ColumnName="ExpirationDate2" />
+                <ScalarProperty Name="ImportoEstinzione2" ColumnName="ImportoEstinzione2" />
+                <ScalarProperty Name="DateOfCancellation3" ColumnName="DateOfCancellation3" />
+                <ScalarProperty Name="DateOfCancellation2" ColumnName="DateOfCancellation2" />
+                <ScalarProperty Name="Iban" ColumnName="Iban" />
+                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+                <ScalarProperty Name="DataRimborso" ColumnName="DataRimborso" />
+                <ScalarProperty Name="CapitaleResiduo" ColumnName="CapitaleResiduo" />
+                <ScalarProperty Name="ImportoEstinzione" ColumnName="ImportoEstinzione" />
+                <ScalarProperty Name="InsuredRate" ColumnName="InsuredRate" />
+                <ScalarProperty Name="CommissioniDanni" ColumnName="CommissioniDanni" />
+                <ScalarProperty Name="PremioNettoDanni" ColumnName="PremioNettoDanni" />
+                <ScalarProperty Name="TassiDanni" ColumnName="TassiDanni" />
+                <ScalarProperty Name="PremioLordoDanni" ColumnName="PremioLordoDanni" />
+                <ScalarProperty Name="CommissioniVita" ColumnName="CommissioniVita" />
+                <ScalarProperty Name="PremioVita" ColumnName="PremioVita" />
+                <ScalarProperty Name="Commissioni" ColumnName="Commissioni" />
+                <ScalarProperty Name="PremioNetto" ColumnName="PremioNetto" />
+                <ScalarProperty Name="Tassi" ColumnName="Tassi" />
+                <ScalarProperty Name="PremioLordo" ColumnName="PremioLordo" />
+                <ScalarProperty Name="InsuredSum" ColumnName="InsuredSum" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="DateOfSignature" ColumnName="DateOfSignature" />
+                <ScalarProperty Name="DateOfCancellation" ColumnName="DateOfCancellation" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Tariff" ColumnName="Tariff" />
+                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="CalculatedAge" ColumnName="CalculatedAge" />
+                <ScalarProperty Name="Birth" ColumnName="Birth" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="PolicyNumber" ColumnName="PolicyNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Nessuno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
